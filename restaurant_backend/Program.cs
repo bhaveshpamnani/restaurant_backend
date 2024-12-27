@@ -1,10 +1,13 @@
+using restaurant_backend.Data;
+using restaurant_backend.Model;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddScoped<UserRepository>();
 // Add services for controllers
 builder.Services.AddControllers();
 
