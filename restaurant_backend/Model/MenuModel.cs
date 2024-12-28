@@ -8,5 +8,5 @@ public class MenuModel
     public string Description { get; set; }
     public decimal Price { get; set; }
     public string ImageURL { get; set; }
-    public bool AvailablityStatus { get; set; }
+    public bool AvailabilityStatus { get; set; }
 }
