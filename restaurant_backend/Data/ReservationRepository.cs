@@ -31,16 +31,16 @@ public class ReservationRepository
                     new GetReservationModel()
                     {
                         ReservationID = Convert.ToInt32(reader["ReservationID"]),
-                        BookDate = reader["BookDate"].ToString(),
-                        BookTime = reader["BookTime"].ToString(),
-                        PersonCount = Convert.ToInt32(reader["PersonCount"].ToString()),
+                        BookDate = reader["Book_Date"].ToString(),
+                        BookTime = reader["Book_Time"].ToString(),
+                        PersonCount = Convert.ToInt32(reader["Person_Count"].ToString()),
                         UserID = Convert.ToInt32(reader["UserID"].ToString()),
-                        ReservationStatus = reader["ReservationStatus"].ToString(),
+                        ReservationStatus = reader["Reservation_Status"].ToString(),
                         UserName = reader["UserName"].ToString(),
                         UserEmail = reader["UserEmail"].ToString(),
                         TableID = Convert.ToInt32(reader["TableID"].ToString()),
                         TableCode = reader["TableCode"].ToString(),
-                        Avaliablity_Status = reader["Avaliablity_Status"].ToString()
+                        Avaliablity_Status = reader["Availability_Status"].ToString()
                     }
                 );
             }
@@ -70,16 +70,16 @@ public class ReservationRepository
                     new GetReservationModel()
                     {
                         ReservationID = Convert.ToInt32(reader["ReservationID"]),
-                        BookDate = reader["BookDate"].ToString(),
-                        BookTime = reader["BookTime"].ToString(),
-                        PersonCount = Convert.ToInt32(reader["PersonCount"].ToString()),
+                        BookDate = reader["Book_Date"].ToString(),
+                        BookTime = reader["Book_Time"].ToString(),
+                        PersonCount = Convert.ToInt32(reader["Person_Count"].ToString()),
                         UserID = Convert.ToInt32(reader["UserID"].ToString()),
-                        ReservationStatus = reader["ReservationStatus"].ToString(),
+                        ReservationStatus = reader["Reservation_Status"].ToString(),
                         UserName = reader["UserName"].ToString(),
                         UserEmail = reader["UserEmail"].ToString(),
                         TableID = Convert.ToInt32(reader["TableID"].ToString()),
                         TableCode = reader["TableCode"].ToString(),
-                        Avaliablity_Status = reader["Avaliablity_Status"].ToString()
+                        Avaliablity_Status = reader["Availability_Status"].ToString()
                     }
                 );
             }
