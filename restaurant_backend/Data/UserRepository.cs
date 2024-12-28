@@ -14,9 +14,9 @@ public class UserRepository
     }
 
     #region GetAll User
-    public IEnumerable<UserModel> GetAllUser()
+    public IEnumerable<GetUserModel> GetAllUser()
     {
-        var users = new List<UserModel>();
+        var users = new List<GetUserModel>();
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             SqlCommand cmd = new SqlCommand("GetUsers", conn)
@@ -28,7 +28,7 @@ public class UserRepository
             while (reader.Read())
             {
                 users.Add(
-                    new UserModel()
+                    new GetUserModel()
                     {
                         UserID = Convert.ToInt32(reader["UserID"]),
                         UserName = reader["UserName"].ToString(),
@@ -48,9 +48,9 @@ public class UserRepository
 
     #region GetUserProfile
 
-    public IEnumerable<UserModel> GetUserProfile(int UserID)
+    public IEnumerable<GetUserModel> GetUserProfile(int UserID)
     {
-        var user = new List<UserModel>();
+        var user = new List<GetUserModel>();
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
             SqlCommand cmd = new SqlCommand("GetUserById", conn)
@@ -63,7 +63,7 @@ public class UserRepository
             if (reader.Read())
             {
                 user.Add(
-                    new UserModel()
+                    new GetUserModel()
                     {
                         UserID = Convert.ToInt32(reader["UserID"]),
                         UserName = reader["UserName"].ToString(),
@@ -94,7 +94,7 @@ public class UserRepository
             };
             conn.Open();
             cmd.Parameters.AddWithValue("@UserName", user.UserName);
-            cmd.Parameters.AddWithValue("@Email", user.UserEmail);
+            cmd.Parameters.AddWithValue("@UserEmail", user.UserEmail);
             cmd.Parameters.AddWithValue("@Password", user.Password);
             cmd.Parameters.AddWithValue("@Phone", user.Phone);
             cmd.Parameters.AddWithValue("@RoleID", user.RoleID);

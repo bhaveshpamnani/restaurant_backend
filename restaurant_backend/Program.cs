@@ -1,3 +1,5 @@
+using System.Reflection;
+using FluentValidation.AspNetCore;
 using restaurant_backend.Data;
 using restaurant_backend.Model;
 
@@ -8,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddControllers().AddFluentValidation(f => f.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 // Add services for controllers
 builder.Services.AddControllers();
 
