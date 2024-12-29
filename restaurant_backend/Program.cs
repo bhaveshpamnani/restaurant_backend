@@ -19,6 +19,7 @@ builder.Services.AddScoped<MenuCategoryRepository>();
 builder.Services.AddScoped<InventoryRepository>();
 builder.Services.AddScoped<FeedbackCategoryRepository>();
 builder.Services.AddScoped<DinningTableRepository>();
+builder.Services.AddScoped<CategoryRepository>();
 builder.Services.AddControllers().AddFluentValidation(f => f.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 // Add services for controllers
 builder.Services.AddControllers();
