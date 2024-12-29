@@ -9,6 +9,6 @@ public class InventoryValidationModel : AbstractValidator<InventoryModel>
     {
         RuleFor(i => i.ItemName).NotEmpty().NotNull().WithMessage("Item Name is required");
         RuleFor(i => i.QuantityAvailable).NotEmpty().NotNull().WithMessage("QuantityAvailable is required");
-        RuleFor(i => i.QuantityWanted).NotEmpty().NotNull().WithMessage("QuantityWanted is required");
+        // # RuleFor(i => i.QuantityWanted).NotEmpty().NotNull().WithMessage("QuantityWanted is required");
     }
 }
