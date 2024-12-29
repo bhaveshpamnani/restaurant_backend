@@ -31,16 +31,16 @@ public class ReservationRepository
                     new GetReservationModel()
                     {
                         ReservationID = Convert.ToInt32(reader["ReservationID"]),
-                        BookDate = reader["Book_Date"].ToString(),
-                        BookTime = reader["Book_Time"].ToString(),
-                        PersonCount = Convert.ToInt32(reader["Person_Count"].ToString()),
+                        BookDate = reader["BookDate"].ToString(),
+                        BookTime = reader["BookTime"].ToString(),
+                        PersonCount = Convert.ToInt32(reader["PersonCount"].ToString()),
                         UserID = Convert.ToInt32(reader["UserID"].ToString()),
-                        ReservationStatus = reader["Reservation_Status"].ToString(),
+                        ReservationStatus = reader["ReservationStatus"].ToString(),
                         UserName = reader["UserName"].ToString(),
                         UserEmail = reader["UserEmail"].ToString(),
                         TableID = Convert.ToInt32(reader["TableID"].ToString()),
                         TableCode = reader["TableCode"].ToString(),
-                        Avaliablity_Status = reader["Availability_Status"].ToString()
+                        Avaliablity_Status = reader["AvailabilityStatus"].ToString()
                     }
                 );
             }
@@ -70,16 +70,16 @@ public class ReservationRepository
                     new GetReservationModel()
                     {
                         ReservationID = Convert.ToInt32(reader["ReservationID"]),
-                        BookDate = reader["Book_Date"].ToString(),
-                        BookTime = reader["Book_Time"].ToString(),
-                        PersonCount = Convert.ToInt32(reader["Person_Count"].ToString()),
+                        BookDate = reader["BookDate"].ToString(),
+                        BookTime = reader["BookTime"].ToString(),
+                        PersonCount = Convert.ToInt32(reader["PersonCount"].ToString()),
                         UserID = Convert.ToInt32(reader["UserID"].ToString()),
-                        ReservationStatus = reader["Reservation_Status"].ToString(),
+                        ReservationStatus = reader["ReservationStatus"].ToString(),
                         UserName = reader["UserName"].ToString(),
                         UserEmail = reader["UserEmail"].ToString(),
                         TableID = Convert.ToInt32(reader["TableID"].ToString()),
                         TableCode = reader["TableCode"].ToString(),
-                        Avaliablity_Status = reader["Availability_Status"].ToString()
+                        Avaliablity_Status = reader["AvailabilityStatus"].ToString()
                     }
                 );
             }
@@ -102,10 +102,10 @@ public class ReservationRepository
             conn.Open();
             cmd.Parameters.AddWithValue("@UserID", reservation.UserID);
             cmd.Parameters.AddWithValue("@TableID", reservation.TableID);
-            cmd.Parameters.AddWithValue("@Book_Date", reservation.BookDate);
-            cmd.Parameters.AddWithValue("@Book_Time", reservation.BookTime);
-            cmd.Parameters.AddWithValue("@Person_Count", reservation.PersonCount);
-            cmd.Parameters.AddWithValue("@Reservation_Status", reservation.ReservationStatus);
+            cmd.Parameters.AddWithValue("@BookDate", reservation.BookDate);
+            cmd.Parameters.AddWithValue("@BookTime", reservation.BookTime);
+            cmd.Parameters.AddWithValue("@PersonCount", reservation.PersonCount);
+            cmd.Parameters.AddWithValue("@ReservationStatus", reservation.ReservationStatus);
             int rawEff = cmd.ExecuteNonQuery();
             return rawEff > 0;
         }
@@ -126,10 +126,10 @@ public class ReservationRepository
             cmd.Parameters.AddWithValue("@ReservationID", reservation.ReservationID);
             cmd.Parameters.AddWithValue("@UserID", reservation.UserID);
             cmd.Parameters.AddWithValue("@TableID", reservation.TableID);
-            cmd.Parameters.AddWithValue("@Book_Date", reservation.BookDate);
-            cmd.Parameters.AddWithValue("@Book_Time", reservation.BookTime);
-            cmd.Parameters.AddWithValue("@Person_Count", reservation.PersonCount);
-            cmd.Parameters.AddWithValue("@Reservation_Status", reservation.ReservationStatus);
+            cmd.Parameters.AddWithValue("@BookDate", reservation.BookDate);
+            cmd.Parameters.AddWithValue("@BookTime", reservation.BookTime);
+            cmd.Parameters.AddWithValue("@PersonCount", reservation.PersonCount);
+            cmd.Parameters.AddWithValue("@ReservationStatus", reservation.ReservationStatus);
             int rawEff = cmd.ExecuteNonQuery();
             return rawEff > 0;
         }
