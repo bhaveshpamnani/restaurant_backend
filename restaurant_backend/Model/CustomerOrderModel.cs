@@ -10,5 +10,5 @@ public class CustomerOrderModel
     public decimal  TotalAmount { get; set; }
     public string  PaymentStatus { get; set; }
     public string  OrderStatus { get; set; }
-    public string  CreatedAt { get; set; }
+    public string?  CreatedAt { get; set; }
 }

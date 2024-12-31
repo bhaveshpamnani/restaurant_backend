@@ -30,6 +30,7 @@ public class DinningTableRepository
                 DinningTable.Add(
                     new DinningTableModel()
                     {
+                        TableID = Convert.ToInt32(reader["TableID"]),
                         PersonCount = Convert.ToInt32(reader["PersonCount"]),
                         AvailabilityStatus = Convert.ToBoolean(reader["AvailabilityStatus"].ToString()),
                         TableCode = reader["TableCode"].ToString(),
@@ -49,7 +50,7 @@ public class DinningTableRepository
         var DinningTable = new List<DinningTableModel>();
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            SqlCommand cmd = new SqlCommand("GetDinningTableById", conn)
+            SqlCommand cmd = new SqlCommand("GetDiningTableById", conn)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -61,6 +62,7 @@ public class DinningTableRepository
                 DinningTable.Add(
                     new DinningTableModel()
                     {
+                        TableID = Convert.ToInt32(reader["TableID"]),
                         PersonCount = Convert.ToInt32(reader["PersonCount"]),
                         AvailabilityStatus = Convert.ToBoolean(reader["AvailabilityStatus"].ToString()),
                         TableCode = reader["TableCode"].ToString(),
@@ -79,7 +81,7 @@ public class DinningTableRepository
     {
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            SqlCommand cmd = new SqlCommand("CreateDinningTable", conn)
+            SqlCommand cmd = new SqlCommand("CreateDiningTable", conn)
             {
                 CommandType = CommandType.StoredProcedure,
             };
@@ -99,7 +101,7 @@ public class DinningTableRepository
     {
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            SqlCommand cmd = new SqlCommand("UpdateDinningTable",conn)
+            SqlCommand cmd = new SqlCommand("UpdateDiningTable",conn)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -121,7 +123,7 @@ public class DinningTableRepository
     {
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            SqlCommand cmd = new SqlCommand("DeleteDinningTable", conn)
+            SqlCommand cmd = new SqlCommand("DeleteDiningTable", conn)
             {
                 CommandType = CommandType.StoredProcedure
             };

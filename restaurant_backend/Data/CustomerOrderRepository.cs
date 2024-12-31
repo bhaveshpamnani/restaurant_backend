@@ -19,7 +19,7 @@ public class CustomerOrderRepository
         var CustomerOrder = new List<CustomerOrderModel>();
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            SqlCommand cmd = new SqlCommand("GetCustomerOrders", conn)
+            SqlCommand cmd = new SqlCommand("GetOrders", conn)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -55,7 +55,7 @@ public class CustomerOrderRepository
         var CustomerOrder = new List<CustomerOrderModel>();
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            SqlCommand cmd = new SqlCommand("GetCustomerOrderById", conn)
+            SqlCommand cmd = new SqlCommand("GetOrderById", conn)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -91,12 +91,11 @@ public class CustomerOrderRepository
     {
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            SqlCommand cmd = new SqlCommand("CreateCustomerOrder", conn)
+            SqlCommand cmd = new SqlCommand("CreateOrder", conn)
             {
                 CommandType = CommandType.StoredProcedure,
             };
             conn.Open();
-            cmd.Parameters.AddWithValue("@OrderID", CustomerOrder.OrderID);
             cmd.Parameters.AddWithValue("@UserID", CustomerOrder.UserID);
             cmd.Parameters.AddWithValue("@TableID", CustomerOrder.TableID);
             cmd.Parameters.AddWithValue("@MenuID", CustomerOrder.MenuID);
@@ -104,7 +103,6 @@ public class CustomerOrderRepository
             cmd.Parameters.AddWithValue("@TotalAmount", CustomerOrder.TotalAmount);
             cmd.Parameters.AddWithValue("@PaymentStatus", CustomerOrder.PaymentStatus);
             cmd.Parameters.AddWithValue("@OrderStatus", CustomerOrder.OrderStatus);
-            cmd.Parameters.AddWithValue("@CreatedAt", CustomerOrder.CreatedAt);
             int rawEff = cmd.ExecuteNonQuery();
             return rawEff > 0;
         }
@@ -117,7 +115,7 @@ public class CustomerOrderRepository
     {
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            SqlCommand cmd = new SqlCommand("UpdateCustomerOrder",conn)
+            SqlCommand cmd = new SqlCommand("UpdateOrder",conn)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -130,7 +128,6 @@ public class CustomerOrderRepository
             cmd.Parameters.AddWithValue("@TotalAmount", CustomerOrder.TotalAmount);
             cmd.Parameters.AddWithValue("@PaymentStatus", CustomerOrder.PaymentStatus);
             cmd.Parameters.AddWithValue("@OrderStatus", CustomerOrder.OrderStatus);
-            cmd.Parameters.AddWithValue("@CreatedAt", CustomerOrder.CreatedAt);
             int rawEff = cmd.ExecuteNonQuery();
             return rawEff > 0;
         }
@@ -144,7 +141,7 @@ public class CustomerOrderRepository
     {
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            SqlCommand cmd = new SqlCommand("DeleteCustomerOrder", conn)
+            SqlCommand cmd = new SqlCommand("DeleteOrder", conn)
             {
                 CommandType = CommandType.StoredProcedure
             };
