@@ -168,6 +168,8 @@ public class UserRepository
     {
         public string Token { get; set; }
         public int UserId { get; set; }
+        
+        public String UserName { get; set; }
     }
     public LoginResponse Login(string email, string password)
     {
@@ -188,12 +190,14 @@ public class UserRepository
                 {
                     var userId = Convert.ToInt32(reader["UserID"]);
                     var roleId = Convert.ToInt32(reader["RoleId"]);
+                    var userName = reader["UserName"].ToString();
                     var token = GenerateJwtToken(userId, roleId, _configuration);
 
                     return new LoginResponse
                     {
                         Token = token,
-                        UserId = userId
+                        UserId = userId,
+                        UserName = userName
                     };
                 }
             }

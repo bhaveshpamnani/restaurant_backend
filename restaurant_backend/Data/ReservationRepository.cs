@@ -93,7 +93,6 @@ public class ReservationRepository
             };
             conn.Open();
             cmd.Parameters.AddWithValue("@UserID", reservation.UserID);
-            cmd.Parameters.AddWithValue("@TableID", reservation.TableID);
             cmd.Parameters.AddWithValue("@BookDate", reservation.BookDate);
             cmd.Parameters.AddWithValue("@BookTime", reservation.BookTime);
             cmd.Parameters.AddWithValue("@PersonCount", reservation.PersonCount);
@@ -179,35 +178,4 @@ public class ReservationRepository
     }
     #endregion
     
-    #region Post Reservation Request
-
-    public string PostReservationRequest(ReservationModel reservation)
-    {
-        using (SqlConnection conn = new SqlConnection(_connectionString))
-        {
-            SqlCommand cmd = new SqlCommand("PostReservationRequest", conn)
-            {
-                CommandType = CommandType.StoredProcedure
-            };
-            conn.Open();
-            cmd.Parameters.AddWithValue("@UserId", reservation.UserID);
-            cmd.Parameters.AddWithValue("@BookDate", reservation.BookDate);
-            cmd.Parameters.AddWithValue("@BookTime", reservation.BookTime);
-            cmd.Parameters.AddWithValue("@PersonCount", reservation.PersonCount);
-
-            // Output parameter to get reservation status
-            SqlParameter reservationStatusParam = new SqlParameter("@ReservationStatus", SqlDbType.NVarChar, 100)
-            {
-                Direction = ParameterDirection.Output
-            };
-            cmd.Parameters.Add(reservationStatusParam);
-
-            cmd.ExecuteNonQuery();
-
-            // Return the reservation status
-            return reservationStatusParam.Value.ToString();
-        }
-    }
-
-    #endregion
 }

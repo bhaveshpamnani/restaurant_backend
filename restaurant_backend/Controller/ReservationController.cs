@@ -57,11 +57,5 @@ namespace restaurant_backend.Controller
             var reservations = _reservationRepository.GetReservationsByUserId(UserID);
             return Ok(reservations);
         }
-        [HttpPost("Request")]
-        public IActionResult PostReservationRequest(ReservationModel reservationModel)
-        {
-            var status = _reservationRepository.PostReservationRequest(reservationModel);
-            return Ok(status);
-        }
     }
 }
