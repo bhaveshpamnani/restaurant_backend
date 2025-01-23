@@ -30,7 +30,7 @@ namespace restaurant_backend.Controller
             return Ok(User);
         }
 
-        [HttpPost]
+        [HttpPost("signup")]
         public IActionResult SignUpUser(UserModel UserModel)
         {
             var value = _userRepository.SignUpUser(UserModel);
@@ -50,5 +50,22 @@ namespace restaurant_backend.Controller
             var value = _userRepository.DeleteUser(UserID);
             return Ok(value);
         }
+        
+        [HttpPost("login")]
+        public IActionResult Login([FromBody] LoginModel login)
+        {
+            var response = _userRepository.Login(login.Email, login.Password);
+            if (response != null)
+            {
+                return Ok(response); // Returns token and userId as JSON
+            }
+            return Unauthorized("Invalid credentials");
+        }
     }
+}
+
+public class LoginModel
+{
+    public string Email { get; set; }
+    public string Password { get; set; }
 }

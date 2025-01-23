@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "4ZDHzadb3KOPf5aeHA3Phuh3sy2GFBuqs6spUAmEzio3XKSYRYytKP9u8ppbu+Kiqkm7c/Rh/Zf1Br2A1ONccw==",
+  "dgSpecHash": "PEbV6V7RRmENHaCnQCw8NakEiflQ9OpcPULSfgJ0adp6/OokyGaQts0eeRr4QH0nAP2zEliCb0EmPy+BxsZvMw==",
   "success": true,
   "projectFilePath": "/Users/bhavesh/Documents/Restaurent-Mangement/backend/restaurant_backend/restaurant_backend/restaurant_backend.csproj",
   "expectedPackageFiles": [
     "/Users/bhavesh/.nuget/packages/azure.core/1.38.0/azure.core.1.38.0.nupkg.sha512",
     "/Users/bhavesh/.nuget/packages/azure.identity/1.11.4/azure.identity.1.11.4.nupkg.sha512",
+    "/Users/bhavesh/.nuget/packages/bcrypt.net-next/4.0.3/bcrypt.net-next.4.0.3.nupkg.sha512",
     "/Users/bhavesh/.nuget/packages/fluentvalidation/11.5.1/fluentvalidation.11.5.1.nupkg.sha512",
     "/Users/bhavesh/.nuget/packages/fluentvalidation.aspnetcore/11.3.0/fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
     "/Users/bhavesh/.nuget/packages/fluentvalidation.dependencyinjectionextensions/11.5.1/fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
@@ -59,6 +60,7 @@
     "/Users/bhavesh/.nuget/packages/humanizer.core.zh-cn/2.14.1/humanizer.core.zh-cn.2.14.1.nupkg.sha512",
     "/Users/bhavesh/.nuget/packages/humanizer.core.zh-hans/2.14.1/humanizer.core.zh-hans.2.14.1.nupkg.sha512",
     "/Users/bhavesh/.nuget/packages/humanizer.core.zh-hant/2.14.1/humanizer.core.zh-hant.2.14.1.nupkg.sha512",
+    "/Users/bhavesh/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.0/microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",
     "/Users/bhavesh/.nuget/packages/microsoft.aspnetcore.jsonpatch/8.0.0/microsoft.aspnetcore.jsonpatch.8.0.0.nupkg.sha512",
     "/Users/bhavesh/.nuget/packages/microsoft.aspnetcore.mvc.newtonsoftjson/8.0.0/microsoft.aspnetcore.mvc.newtonsoftjson.8.0.0.nupkg.sha512",
     "/Users/bhavesh/.nuget/packages/microsoft.aspnetcore.openapi/8.0.5/microsoft.aspnetcore.openapi.8.0.5.nupkg.sha512",

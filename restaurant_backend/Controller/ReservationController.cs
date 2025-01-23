@@ -50,5 +50,18 @@ namespace restaurant_backend.Controller
             var value = _reservationRepository.DeleteReservation(ReservationID);
             return Ok(value);
         }
+        
+        [HttpGet("ByUserId/{UserID}")]
+        public IActionResult GetReservationsByUserId(int UserID)
+        {
+            var reservations = _reservationRepository.GetReservationsByUserId(UserID);
+            return Ok(reservations);
+        }
+        [HttpPost("Request")]
+        public IActionResult PostReservationRequest(ReservationModel reservationModel)
+        {
+            var status = _reservationRepository.PostReservationRequest(reservationModel);
+            return Ok(status);
+        }
     }
 }

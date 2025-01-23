@@ -36,11 +36,7 @@ public class ReservationRepository
                         PersonCount = Convert.ToInt32(reader["PersonCount"].ToString()),
                         UserID = Convert.ToInt32(reader["UserID"].ToString()),
                         ReservationStatus = reader["ReservationStatus"].ToString(),
-                        UserName = reader["UserName"].ToString(),
-                        UserEmail = reader["UserEmail"].ToString(),
-                        TableID = Convert.ToInt32(reader["TableID"].ToString()),
                         TableCode = reader["TableCode"].ToString(),
-                        Avaliablity_Status = reader["AvailabilityStatus"].ToString()
                     }
                 );
             }
@@ -75,11 +71,7 @@ public class ReservationRepository
                         PersonCount = Convert.ToInt32(reader["PersonCount"].ToString()),
                         UserID = Convert.ToInt32(reader["UserID"].ToString()),
                         ReservationStatus = reader["ReservationStatus"].ToString(),
-                        UserName = reader["UserName"].ToString(),
-                        UserEmail = reader["UserEmail"].ToString(),
-                        TableID = Convert.ToInt32(reader["TableID"].ToString()),
-                        TableCode = reader["TableCode"].ToString(),
-                        Avaliablity_Status = reader["AvailabilityStatus"].ToString()
+                        TableCode = reader["TableCode"].ToString()
                     }
                 );
             }
@@ -151,6 +143,69 @@ public class ReservationRepository
             cmd.Parameters.AddWithValue("@ReservationID", ReservationID);
             int rawEff = cmd.ExecuteNonQuery();
             return rawEff > 0;
+        }
+    }
+
+    #endregion
+    
+    #region Get Reservation by User ID
+    public IEnumerable<GetReservationModel> GetReservationsByUserId(int userId)
+    {
+        var reservations = new List<GetReservationModel>();
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            SqlCommand cmd = new SqlCommand("GetReservationsByUserId", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            conn.Open();
+            cmd.Parameters.AddWithValue("@UserId", userId);
+            SqlDataReader reader = cmd.ExecuteReader();
+            while (reader.Read())
+            {
+                reservations.Add(new GetReservationModel()
+                {
+                    ReservationID = Convert.ToInt32(reader["ReservationID"]),
+                    BookDate = reader["BookDate"].ToString(),
+                    BookTime = reader["BookTime"].ToString(),
+                    PersonCount = Convert.ToInt32(reader["PersonCount"]),
+                    UserID = Convert.ToInt32(reader["UserID"]),
+                    ReservationStatus = reader["ReservationStatus"].ToString(),
+                    TableCode = reader["TableCode"].ToString()
+                });
+            }
+        }
+        return reservations;
+    }
+    #endregion
+    
+    #region Post Reservation Request
+
+    public string PostReservationRequest(ReservationModel reservation)
+    {
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            SqlCommand cmd = new SqlCommand("PostReservationRequest", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            conn.Open();
+            cmd.Parameters.AddWithValue("@UserId", reservation.UserID);
+            cmd.Parameters.AddWithValue("@BookDate", reservation.BookDate);
+            cmd.Parameters.AddWithValue("@BookTime", reservation.BookTime);
+            cmd.Parameters.AddWithValue("@PersonCount", reservation.PersonCount);
+
+            // Output parameter to get reservation status
+            SqlParameter reservationStatusParam = new SqlParameter("@ReservationStatus", SqlDbType.NVarChar, 100)
+            {
+                Direction = ParameterDirection.Output
+            };
+            cmd.Parameters.Add(reservationStatusParam);
+
+            cmd.ExecuteNonQuery();
+
+            // Return the reservation status
+            return reservationStatusParam.Value.ToString();
         }
     }
 
