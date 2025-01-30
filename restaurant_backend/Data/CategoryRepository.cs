@@ -33,6 +33,7 @@ public class CategoryRepository
                         CategoryID = Convert.ToInt32(reader["CategoryID"]),
                         CategoryName = reader["CategoryName"].ToString(),
                         Description = reader["Description"].ToString(),
+                        ImagePath = reader["ImagePath"].ToString(),
                     }
                 );
             }
@@ -86,10 +87,12 @@ public class CategoryRepository
             conn.Open();
             cmd.Parameters.AddWithValue("@CategoryName", Category.CategoryName);
             cmd.Parameters.AddWithValue("@Description", Category.Description);
+            cmd.Parameters.AddWithValue("@ImagePath", Category.ImagePath ?? string.Empty); // Handle image path
             int rawEff = cmd.ExecuteNonQuery();
             return rawEff > 0;
         }
     }
+
     #endregion
     
     #region UpdateCategory
@@ -98,7 +101,7 @@ public class CategoryRepository
     {
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            SqlCommand cmd = new SqlCommand("UpdateCategory",conn)
+            SqlCommand cmd = new SqlCommand("UpdateCategory", conn)
             {
                 CommandType = CommandType.StoredProcedure
             };
@@ -106,6 +109,7 @@ public class CategoryRepository
             cmd.Parameters.AddWithValue("@CategoryID", Category.CategoryID);
             cmd.Parameters.AddWithValue("@CategoryName", Category.CategoryName);
             cmd.Parameters.AddWithValue("@Description", Category.Description);
+            cmd.Parameters.AddWithValue("@ImagePath", Category.ImagePath ?? string.Empty); // Handle image path
 
             int rawEff = cmd.ExecuteNonQuery();
             return rawEff > 0;
