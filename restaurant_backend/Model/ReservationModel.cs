@@ -23,3 +23,11 @@ public class GetReservationModel
     public int PersonCount { get; set; }
     public string ReservationStatus { get; set; }
 }
+
+public class ReservationRequestModel
+{
+    public int UserId { get; set; }
+    public int PersonCount { get; set; }
+    public DateTime BookDate { get; set; }
+    public TimeSpan BookTime { get; set; }
+}

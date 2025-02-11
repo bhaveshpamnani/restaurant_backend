@@ -30,12 +30,15 @@ namespace restaurant_backend.Controller
             return Ok(reservation);
         }
 
-        [HttpPost]
-        public IActionResult CreateReservation(ReservationModel reservationModel)
+        #region Create Reservation
+        [HttpPost("ReserveTable")]
+        public IActionResult ReserveTable([FromBody] ReservationModel reservationRequest)
         {
-            var value = _reservationRepository.CreateReservation(reservationModel);
-            return Ok(value);
+            var response = _reservationRepository.CreateReservation(reservationRequest);
+            return Ok(response);
         }
+        #endregion
+
 
         [HttpPut]
         public IActionResult UpdateReservation(ReservationModel reservationModel)

@@ -1,3 +1,5 @@
+using DefaultNamespace;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using restaurant_backend.Data;
@@ -10,13 +12,16 @@ namespace restaurant_backend.Controller
     public class CategoryController : ControllerBase
     {
         private readonly CategoryRepository _CategoryRepository;
+        private readonly CloudinaryService _cloudinaryService;
 
-        public CategoryController(CategoryRepository CategoryRepository)
+        public CategoryController(CategoryRepository CategoryRepository,CloudinaryService cloudinaryService)
         {
             _CategoryRepository = CategoryRepository;
+            _cloudinaryService = cloudinaryService;
         }
 
         [HttpGet]
+        
         public IActionResult GetAllCategory()
         {
             var Category = _CategoryRepository.GetAllCategory();
@@ -30,30 +35,30 @@ namespace restaurant_backend.Controller
             return Ok(Category);
         }
 
-        [HttpPost]
-        public IActionResult CreateCategory([FromForm] CategoryModel CategoryModel, IFormFile Image)
+        public class CategoryDto
         {
-            if (Image != null && Image.Length > 0)
+            public int? CategoryID { get; set; }
+            public string CategoryName { get; set; }
+            public string Description { get; set; }
+            public IFormFile ImagePath { get; set; } // New property for image
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateCategory([FromForm] CategoryDto CategoryModel)
+        {
+            if (CategoryModel == null || CategoryModel.ImagePath == null)
+                return BadRequest("Invalid data.");
+            var imageUrl = await _cloudinaryService.UploadImageAsync(CategoryModel.ImagePath);
+            if (string.IsNullOrEmpty(imageUrl))
             {
-                var imageDirectory = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
-
-                // Ensure directory exists
-                if (!Directory.Exists(imageDirectory))
-                {
-                    Directory.CreateDirectory(imageDirectory);
-                }
-
-                var newFilePath = Path.Combine(imageDirectory, Image.FileName);
-                using (var stream = new FileStream(newFilePath, FileMode.Create))
-                {
-                    Image.CopyTo(stream);
-                }
-
-                // Assign the new image path
-                CategoryModel.ImagePath = $"/images/{Image.FileName}";
+                return StatusCode(500, "Image upload failed.");
             }
-
-            var value = _CategoryRepository.CreateCategory(CategoryModel);
+            var category = new CategoryModel()
+            {
+                CategoryName = CategoryModel.CategoryName,
+                Description = CategoryModel.Description,
+                ImagePath = imageUrl, 
+            };
+            var value = _CategoryRepository.CreateCategory(category);
             return Ok(value);
         }
 

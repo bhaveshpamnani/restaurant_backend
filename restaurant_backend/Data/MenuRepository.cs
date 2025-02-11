@@ -70,6 +70,45 @@ public class MenuRepository
                         DishName = reader["DishName"].ToString(),
                         Description = reader["Description"].ToString(),
                         CategoryID = Convert.ToInt32(reader["CategoryID"].ToString()),
+                        Rating = Convert.ToInt32(reader["Rating"].ToString()),
+                        CategoryName = reader["CategoryName"].ToString(),
+                        Price = Convert.ToDecimal(reader["Price"]),
+                        ImageURL = reader["ImgURL"].ToString(),
+                        AvailabilityStatus = Convert.ToBoolean(reader["AvailabilityStatus"])
+                    }
+                );
+            }
+        }
+        return menu;
+    }
+
+    #endregion
+    
+    
+    #region Get menu by id
+
+    public IEnumerable<GetMenuModel> GetMenuByCategoryID(int CategoryID)
+    {
+        var menu = new List<GetMenuModel>();
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            SqlCommand cmd = new SqlCommand("GetMenuByCategoryID", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            conn.Open();
+            cmd.Parameters.AddWithValue("@CategoryID", CategoryID);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                menu.Add(
+                    new GetMenuModel()
+                    {
+                        MenuID = Convert.ToInt32(reader["MenuID"]),
+                        DishName = reader["DishName"].ToString(),
+                        Description = reader["Description"].ToString(),
+                        CategoryID = Convert.ToInt32(reader["CategoryID"].ToString()),
+                        Rating = Convert.ToInt32(reader["Rating"].ToString()),
                         CategoryName = reader["CategoryName"].ToString(),
                         Price = Convert.ToDecimal(reader["Price"]),
                         ImageURL = reader["ImgURL"].ToString(),
@@ -99,6 +138,7 @@ public class MenuRepository
             cmd.Parameters.AddWithValue("@Description", menu.Description);
             cmd.Parameters.AddWithValue("@Price", menu.Price);
             cmd.Parameters.AddWithValue("@ImgURL", menu.ImageURL);
+            cmd.Parameters.AddWithValue("@Rating", menu.Rating);
             cmd.Parameters.AddWithValue("@AvailabilityStatus", menu.AvailabilityStatus);
             int rawEff = cmd.ExecuteNonQuery();
             return rawEff > 0;
