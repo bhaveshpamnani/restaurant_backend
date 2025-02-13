@@ -30,6 +30,7 @@ builder.Services.AddScoped<FeedbackCategoryRepository>();
 builder.Services.AddScoped<DinningTableRepository>();
 builder.Services.AddScoped<CategoryRepository>();
 builder.Services.AddScoped<CustomerOrderRepository>();
+builder.Services.AddScoped<CartRepository>();
 
 builder.Services.AddAuthentication(options =>
     {

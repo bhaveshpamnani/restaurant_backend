@@ -84,8 +84,7 @@ public class MenuRepository
 
     #endregion
     
-    
-    #region Get menu by id
+    #region Get Category wise menu items
 
     public IEnumerable<GetMenuModel> GetMenuByCategoryID(int CategoryID)
     {
