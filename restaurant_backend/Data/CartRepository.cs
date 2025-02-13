@@ -76,7 +76,7 @@ public class CartRepository
                     {
                         CartID = Convert.ToInt32(reader["CartID"]),
                         MenuID = Convert.ToInt32(reader["MenuID"]),
-                        TableID = Convert.ToInt32(reader["TableID"]),
+                        TableID = reader["TableID"] == DBNull.Value ? (int?)null : Convert.ToInt32(reader["TableID"]),
                         DishName = reader["DishName"].ToString(),
                         Description = reader["Description"].ToString(),
                         Rating = Convert.ToInt32(reader["Rating"].ToString()),
