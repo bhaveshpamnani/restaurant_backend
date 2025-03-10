@@ -34,6 +34,7 @@ public class MenuRepository
                         DishName = reader["DishName"].ToString(),
                         Description = reader["Description"].ToString(),
                         CategoryID = Convert.ToInt32(reader["CategoryID"].ToString()),
+                        Rating = Convert.ToInt32(reader["Rating"].ToString()),
                         CategoryName = reader["CategoryName"].ToString(),
                         Price = Convert.ToDecimal(reader["Price"]),
                         ImageURL = reader["ImgURL"].ToString(),
@@ -162,6 +163,7 @@ public class MenuRepository
             cmd.Parameters.AddWithValue("@Description", menu.Description);
             cmd.Parameters.AddWithValue("@Price", menu.Price);
             cmd.Parameters.AddWithValue("@ImgURL", menu.ImageURL);
+            cmd.Parameters.AddWithValue("@Rating", menu.Rating);
             cmd.Parameters.AddWithValue("@AvailabilityStatus", menu.AvailabilityStatus);
             int rawEff = cmd.ExecuteNonQuery();
             return rawEff > 0;

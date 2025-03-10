@@ -65,7 +65,7 @@ namespace restaurant_backend.Controller
 
 
         [HttpPut]
-        public IActionResult UpdateCategory([FromForm] CategoryModel CategoryModel, IFormFile Image)
+        public IActionResult UpdateCategory([FromForm] CategoryModel CategoryModel, IFormFile? Image)
         {
             if (Image != null && Image.Length > 0)
             {
@@ -78,6 +78,10 @@ namespace restaurant_backend.Controller
 
                 // Set the new image path in the model
                 CategoryModel.ImagePath = filePath;
+            }else
+            {
+                // Retain existing image path
+                CategoryModel.ImagePath = CategoryModel.ImagePath;
             }
 
             // Update the category in the database

@@ -22,6 +22,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<DashboardRepository>();
 builder.Services.AddScoped<FeedbackRepository>();
 builder.Services.AddScoped<ReservationRepository>();
 builder.Services.AddScoped<MenuRepository>();

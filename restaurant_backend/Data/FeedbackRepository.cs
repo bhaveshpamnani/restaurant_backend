@@ -33,6 +33,8 @@ public class FeedbackRepository
                         UserID = Convert.ToInt32(reader["UserID"]),
                         Description = reader["Description"].ToString(),
                         CategoryName = reader["CategoryName"].ToString(),
+                        UserName = reader["UserName"].ToString(),
+                        UserEmail = reader["UserEmail"].ToString(),
                         FeedbackID = Convert.ToInt32(reader["FeedbackID"].ToString()),
                         FeedbackCategoryID = Convert.ToInt32(reader["FeedbackCategoryID"].ToString())
                     }

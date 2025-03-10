@@ -17,6 +17,7 @@ public class GetReservationModel
 {
     public int ReservationID { get; set; }
     public int UserID { get; set; }
+    public String UserName { get; set; }
     public string BookDate { get; set; }
     public string TableCode { get; set; }
     public string BookTime { get; set; }
@@ -30,4 +31,12 @@ public class ReservationRequestModel
     public int PersonCount { get; set; }
     public DateTime BookDate { get; set; }
     public TimeSpan BookTime { get; set; }
+}
+
+public class ReservationUpdateModel
+{
+    public int ReservationId { get; set; }
+    public int UserId { get; set; }
+    public int? TableId { get; set; }
+    public string ReservationStatus { get; set; }
 }

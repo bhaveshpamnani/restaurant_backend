@@ -79,8 +79,24 @@ namespace restaurant_backend.Controller
         }
 
         [HttpPut]
-        public IActionResult UpdateMenu(MenuModel MenuModel)
+        public IActionResult UpdateMenu([FromForm] MenuModel MenuModel, IFormFile? Image)
         {
+            if (Image != null && Image.Length > 0)
+            {
+                // Save the new image
+                var filePath = Path.Combine("wwwroot/images", Image.FileName);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    Image.CopyTo(stream);
+                }
+
+                // Set the new image path in the model
+                MenuModel.ImageURL = filePath;
+            }else
+            {
+                // Retain existing image path
+                MenuModel.ImageURL = MenuModel.ImageURL;
+            }
             var value = _MenuRepository.UpdateMenu(MenuModel);
             return Ok(value);
         }

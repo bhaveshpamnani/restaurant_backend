@@ -33,6 +33,7 @@ public class ReservationRepository
                         ReservationID = Convert.ToInt32(reader["ReservationID"]),
                         BookDate = reader["BookDate"].ToString(),
                         BookTime = reader["BookTime"].ToString(),
+                        UserName = reader["UserName"].ToString(),
                         PersonCount = Convert.ToInt32(reader["PersonCount"].ToString()),
                         UserID = Convert.ToInt32(reader["UserID"].ToString()),
                         ReservationStatus = reader["ReservationStatus"].ToString(),
@@ -105,26 +106,36 @@ public class ReservationRepository
     
     #region UpdateReservation
 
-    public bool UpdateReservation(ReservationModel reservation)
+    public bool UpdateReservation(ReservationUpdateModel reservation)
     {
         using (SqlConnection conn = new SqlConnection(_connectionString))
         {
-            SqlCommand cmd = new SqlCommand("UpdateReservation",conn)
+            SqlCommand cmd = new SqlCommand("UpdateReservation", conn)
             {
                 CommandType = CommandType.StoredProcedure
             };
             conn.Open();
-            cmd.Parameters.AddWithValue("@ReservationID", reservation.ReservationID);
-            cmd.Parameters.AddWithValue("@UserID", reservation.UserID);
-            cmd.Parameters.AddWithValue("@TableID", reservation.TableID);
-            cmd.Parameters.AddWithValue("@BookDate", reservation.BookDate);
-            cmd.Parameters.AddWithValue("@BookTime", reservation.BookTime);
-            cmd.Parameters.AddWithValue("@PersonCount", reservation.PersonCount);
+        
+            cmd.Parameters.AddWithValue("@ReservationID", reservation.ReservationId);
+            cmd.Parameters.AddWithValue("@UserID", reservation.UserId);
+            cmd.Parameters.AddWithValue("@TableID", reservation.TableId.HasValue ? reservation.TableId.Value : (object)DBNull.Value);
             cmd.Parameters.AddWithValue("@ReservationStatus", reservation.ReservationStatus);
-            int rawEff = cmd.ExecuteNonQuery();
-            return rawEff > 0;
+
+            int rowsAffected = cmd.ExecuteNonQuery();
+
+            if (rowsAffected > 0)
+            {
+                Console.WriteLine("Database update successful.");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Database update failed.");
+                return false;
+            }
         }
     }
+
 
     #endregion
 
@@ -178,4 +189,41 @@ public class ReservationRepository
     }
     #endregion
     
+    
+    #region UpdateReservation
+
+    public bool UpdateByUserReservation(ReservationModel reservation)
+    {
+        using (SqlConnection conn = new SqlConnection(_connectionString))
+        {
+            SqlCommand cmd = new SqlCommand("UpdateByUserReservation", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+            conn.Open();
+        
+            cmd.Parameters.AddWithValue("@ReservationID", reservation.ReservationID);
+            cmd.Parameters.AddWithValue("@UserID", reservation.UserID);
+            cmd.Parameters.AddWithValue("@BookTime", reservation.BookTime);
+            cmd.Parameters.AddWithValue("@BookDate", reservation.BookDate);
+            cmd.Parameters.AddWithValue("@PersonCount", reservation.PersonCount);
+            cmd.Parameters.AddWithValue("@ReservationStatus", reservation.ReservationStatus);
+
+            int rowsAffected = cmd.ExecuteNonQuery();
+
+            if (rowsAffected > 0)
+            {
+                Console.WriteLine("Database update successful.");
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Database update failed.");
+                return false;
+            }
+        }
+    }
+
+
+    #endregion
 }

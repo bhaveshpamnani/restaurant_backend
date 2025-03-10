@@ -41,12 +41,24 @@ namespace restaurant_backend.Controller
 
 
         [HttpPut]
-        public IActionResult UpdateReservation(ReservationModel reservationModel)
+        public IActionResult UpdateReservation(ReservationUpdateModel reservationModel)
         {
             var value = _reservationRepository.UpdateReservation(reservationModel);
-            return Ok(value);
+
+            if (value)
+            {
+                Console.WriteLine("Update successful.");
+                return Ok(value);
+            }
+            else
+            {
+                Console.WriteLine("Update failed.");
+                return BadRequest("Update failed.");
+            }
         }
         
+        
+
         [HttpDelete("{ReservationID}")]
         public IActionResult DeleteReservation(int ReservationID)
         {
@@ -59,6 +71,23 @@ namespace restaurant_backend.Controller
         {
             var reservations = _reservationRepository.GetReservationsByUserId(UserID);
             return Ok(reservations);
+        }
+        
+        [HttpPut("ByUser")]
+        public IActionResult UpdateByUserReservation(ReservationModel reservationModel)
+        {
+            var value = _reservationRepository.UpdateByUserReservation(reservationModel);
+
+            if (value)
+            {
+                Console.WriteLine("Update successful.");
+                return Ok(value);
+            }
+            else
+            {
+                Console.WriteLine("Update failed.");
+                return BadRequest("Update failed.");
+            }
         }
     }
 }
